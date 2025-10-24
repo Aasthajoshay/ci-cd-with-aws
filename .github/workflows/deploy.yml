@@ -7,11 +7,9 @@ on:
 
 jobs:
   deploy:
-    name: Push to EC2
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout the code
+      - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Deploy via SSH
@@ -22,7 +20,5 @@ jobs:
           key: ${{ secrets.PRIVATE_SSH_KEY }}
           port: 22
           script: |
-            cd ~/ci-cd-with-aws
-            git pull origin main
-            chmod +x deploy.sh
-            ./deploy.sh
+            chmod +x ~/ci-cd-with-aws/deploy.sh
+            ~/ci-cd-with-aws/deploy.sh
