@@ -14,11 +14,15 @@ jobs:
       - name: Checkout the code
         uses: actions/checkout@v2
 
-      - name: executing remote ssh commands using password
+      - name: Deploy via SSH
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: 13.203.86.101
           username: ubuntu
           key: ${{ secrets.PRIVATE_SSH_KEY }}
           port: 22
-          script: ./deploy.sh
+          script: |
+            cd ~/ci-cd-with-aws
+            git pull origin main
+            chmod +x deploy.sh
+            ./deploy.sh
