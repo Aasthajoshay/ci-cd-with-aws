@@ -7,18 +7,18 @@ on:
 
 jobs:
   deploy:
+    name: Push to EC2
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
+      - name: Checkout the code
         uses: actions/checkout@v2
 
-      - name: Deploy via SSH
+      - name: executing remote ssh commands using password
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: 13.203.86.101
           username: ubuntu
           key: ${{ secrets.PRIVATE_SSH_KEY }}
           port: 22
-          script: |
-            chmod +x ~/ci-cd-with-aws/deploy.sh
-            ~/ci-cd-with-aws/deploy.sh
+          script: ./deploy.sh
