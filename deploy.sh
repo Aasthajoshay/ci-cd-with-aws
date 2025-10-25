@@ -1,23 +1,20 @@
 #!/bin/bash
 
-# Navigate to project directory
 cd ~/ci-cd-with-aws
 
-# Fetch latest code
+# Kill any process using port 3000 (prevents EADDRINUSE)
+fuser -k 3000/tcp || true
+
+# Fetch and reset code (ignore divergent branches)
 git fetch origin main
 git reset --hard origin/main
 
-# Install dependencies (clean install)
+# Install dependencies
 npm ci
 
-# Build the Next.js app
+# Build
 npm run build
 
-# Kill any process using port 3000 (optional safety)
-fuser -k 3000/tcp || true
-
-# Start or restart app with PM2
+# Start/restart with PM2
 pm2 start npm --name "next-app" -- start || pm2 restart next-app
-
-# Save PM2 process list to survive reboot
 pm2 save
