@@ -26,6 +26,18 @@ jobs:
         key: ${{ secrets.PRIVATE_SSH_KEY }} 
         port: 22
         script: |
-          # Navigate to project and run deploy.sh
-          chmod +x ~/ci-cd-with-aws/deploy.sh
-          ~/ci-cd-with-aws/deploy.sh
+          cd ~/ci-cd-with-aws
+
+          # Configure Git to merge safely
+          git config pull.rebase false
+          git pull origin main
+
+          # Install dependencies (clean install)
+          npm ci
+
+          # Build Next.js app
+          npm run build
+
+          # Gracefully reload or start with PM2
+          pm2 reload next-app || pm2 start npm --name next-app -- start
+          pm2 save
