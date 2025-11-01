@@ -3,9 +3,10 @@ COMPLETE CI-CD PIPELINE
 
 Here’s a quick demo of how the CI/CD pipeline deploys to AWS EC2 automatically after pushing to the main branch.
 
-<video src="https://github.com/Aasthajoshay/ci-cd-with-aws/raw/main/media.mp4" width="640" controls>
-  Your browser does not support the video tag.
-</video>
+## 🚀 CI/CD Pipeline in Action
+
+[![Watch the demo](https://github.com/Aasthajoshay/ci-cd-with-aws/raw/main/media.gif)](https://github.com/Aasthajoshay/ci-cd-with-aws/raw/main/media.mp4)
+
 
 ---
 
